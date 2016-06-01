@@ -41,6 +41,7 @@ public class Query {
 	 * @param tableNames the tableNames to set
 	 */
 	public void mapTableNames(String shortName, String longName) {
+		if (tableNames == null) tableNames = new HashMap<>();
 		this.tableNames.put(shortName, longName);
 	}
 	/**

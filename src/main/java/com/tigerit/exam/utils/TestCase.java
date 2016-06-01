@@ -1,6 +1,5 @@
 package com.tigerit.exam.utils;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class TestCase {

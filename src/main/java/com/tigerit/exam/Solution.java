@@ -2,6 +2,7 @@ package com.tigerit.exam;
 
 
 import static com.tigerit.exam.IO.*;
+import static com.tigerit.exam.utils.IOHelper.*;
 
 import com.tigerit.exam.utils.Query;
 import com.tigerit.exam.utils.TestCase;
