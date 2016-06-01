@@ -6,7 +6,7 @@ import java.util.HashMap;
 public class Table {
 	private String name;
 	private ArrayList<String> columns;
-	private HashMap<String, ArrayList<Integer>> rows;
+	private HashMap<String, ArrayList<Integer>> values;
 	/**
 	 * @return the name
 	 */
@@ -28,32 +28,43 @@ public class Table {
 	/**
 	 * @param collumns the columns to set
 	 */
-	public void setCollumns(ArrayList<String> columns) {
+	public void setColumns(ArrayList<String> columns) {
 		this.columns = columns;
 	}
 	/**
 	 * @return the rows
 	 */
-	public HashMap<String, ArrayList<Integer>> getRows() {
-		return rows;
+	public HashMap<String, ArrayList<Integer>> getValues() {
+		return values;
 	}
 	/**
 	 * @param rows the rows to set
 	 */
-	public void setRows(HashMap<String, ArrayList<Integer>> rows) {
-		this.rows = rows;
+	public void setValues(HashMap<String, ArrayList<Integer>> rows) {
+		this.values = rows;
 	}
 	
 	/**
 	 * @return the values of the specified column
 	 */
-	public ArrayList<Integer> getValues(String column) {
-		return rows.get(column);
+	public ArrayList<Integer> getValuesOf(String column) {
+		return values.get(column);
 	}
-	/**
-	 * @param values of the specified column to set
-	 */
-	public void setRows(String column, ArrayList<Integer> values) {
-		this.rows.put(column, values);
+	public void print() {
+		System.out.println("############## Starts Table "+name+" #############");
+		
+		for (int i=0; i<columns.size(); i++) {
+			System.out.print(columns.get(i)+"\t");
+		}
+		System.out.println();
+		for (int i=0; i<values.size(); i++) {
+			for (int j=0; j<columns.size(); j++) {
+				System.out.print(values.get(columns.get(j)).get(i)+"\t");
+			}
+			System.out.println();
+		}
+		
+		System.out.println("################### Ends Table ##################");
 	}
+	
 }

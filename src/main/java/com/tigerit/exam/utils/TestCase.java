@@ -6,8 +6,6 @@ import java.util.HashMap;
 public class TestCase {
 	private int numTable;
 	private HashMap<String, Table> tables;
-	private int numQueries;
-	private ArrayList<Query> queries;
 	/**
 	 * @return the numTable
 	 */
@@ -41,33 +39,9 @@ public class TestCase {
 	/**
 	 * @param tables the tables to set
 	 */
-	public void setTables(Table table) {
+	public void putTable(Table table) {
+		if (tables == null) tables = new HashMap<String, Table>();
 		this.tables.put(table.getName(), table);
 	}
-	/**
-	 * @return the numQueries
-	 */
-	public int getNumQueries() {
-		return numQueries;
-	}
-	/**
-	 * @param numQueries the numQueries to set
-	 */
-	public void setNumQueries(int numQueries) {
-		this.numQueries = numQueries;
-	}
-	/**
-	 * @return the queries
-	 */
-	public ArrayList<Query> getQueries() {
-		return queries;
-	}
-	/**
-	 * @param queries the queries to set
-	 */
-	public void setQueries(ArrayList<Query> queries) {
-		this.queries = queries;
-	}
-	
 	
 }
