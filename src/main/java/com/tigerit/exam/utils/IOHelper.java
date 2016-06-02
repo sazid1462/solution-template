@@ -90,11 +90,11 @@ public class IOHelper {
     		}
     		else if (s.equalsIgnoreCase("*")) {
     			rawColumns = "*";
-    			//TODO;
     		} else if (f==true) {
     			rawColumns = rawColumns+","+s;
     		}
     	}
+    	query.setColumns(rawColumns);
     	
     	raw = readLine();
     	tok = new StringTokenizer(raw, " ,");
@@ -103,7 +103,7 @@ public class IOHelper {
     	if (tok.hasMoreTokens()) table1Long = tok.nextToken();
     	if (tok.hasMoreTokens()) table1Short = tok.nextToken();
     	else table1Short = table1Long;
-    	query.mapTableNames(table1Short, table1Long);
+//    	query.mapTableNames(table1Short, table1Long);
     	
     	raw = readLine();
     	tok = new StringTokenizer(raw, " ,");    	
@@ -112,7 +112,10 @@ public class IOHelper {
     	if (tok.hasMoreTokens()) table2Long = tok.nextToken();
     	if (tok.hasMoreTokens()) table2Short = tok.nextToken();
     	else table2Short = table2Long;
-    	query.mapTableNames(table2Short, table2Long);
+//    	query.mapTableNames(table2Short, table2Long);
+    	
+    	query.setTableShortNames(table1Short, table2Short);
+    	query.setTableLongNames(table1Long, table2Long);
     	
     	raw = readLine();
     	tok = new StringTokenizer(raw, " ");
@@ -121,8 +124,11 @@ public class IOHelper {
     	if (tok.hasMoreTokens()) rawCondition += tok.nextToken();
     	if (tok.hasMoreTokens()) rawCondition += tok.nextToken();
     	
-    	// TODO
+		query.setCondition(rawCondition);
     	
+		// read the blank line
+		raw = readLine();
+		
     	return query;
     }
 }

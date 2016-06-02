@@ -32,7 +32,7 @@ public class TestCase {
 	/**
 	 * @return the table named [tableName]
 	 */
-	public Table getTables(String tableName) {
+	public Table getTable(String tableName) {
 		return tables.get(tableName);
 	}
 	/**

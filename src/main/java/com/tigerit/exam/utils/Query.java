@@ -4,69 +4,56 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Query {
-	private ArrayList<String> selectedRows;
-	private HashMap<String, String> tableNames;
-	private String col1, col2;
+	private String columns;
+	private String tableShortNames[], tableLongNames[];
+	private String condition;
 	/**
-	 * @return the selectedRows
+	 * @return the columns
 	 */
-	public ArrayList<String> getSelectedRows() {
-		return selectedRows;
+	public String getColumns() {
+		return columns;
 	}
 	/**
-	 * @param selectedRows the selectedRows to set
+	 * @param columns the columns to set
 	 */
-	public void setSelectedRows(ArrayList<String> selectedRows) {
-		this.selectedRows = selectedRows;
+	public void setColumns(String columns) {
+		this.columns = columns;
 	}
 	/**
-	 * @return the tableNames
+	 * @return the tableShortNames
 	 */
-	public HashMap<String, String> getTableNames() {
-		return tableNames;
+	public String[] getTableShortNames() {
+		return tableShortNames;
 	}
 	/**
-	 * @param tableNames the tableNames to set
+	 * @param tableShortNames the tableShortNames to set
 	 */
-	public void setTableNames(HashMap<String, String> tableNames) {
-		this.tableNames = tableNames;
+	public void setTableShortNames(String... tableShortNames) {
+		this.tableShortNames = tableShortNames;
 	}
 	/**
-	 * @return the longTableName of the given shortTableName
+	 * @return the tableLongNames
 	 */
-	public String getLongTableName(String shortName) {
-		return tableNames.get(shortName);
+	public String[] getTableLongNames() {
+		return tableLongNames;
 	}
 	/**
-	 * @param tableNames the tableNames to set
+	 * @param tableLongNames the tableLongNames to set
 	 */
-	public void mapTableNames(String shortName, String longName) {
-		if (tableNames == null) tableNames = new HashMap<>();
-		this.tableNames.put(shortName, longName);
+	public void setTableLongNames(String... tableLongNames) {
+		this.tableLongNames = tableLongNames;
 	}
 	/**
-	 * @return the col1
+	 * @return the condition
 	 */
-	public String getCol1() {
-		return col1;
+	public String getCondition() {
+		return condition;
 	}
 	/**
-	 * @param col1 the col1 to set
+	 * @param condition the condition to set
 	 */
-	public void setCol1(String col1) {
-		this.col1 = col1;
-	}
-	/**
-	 * @return the col2
-	 */
-	public String getCol2() {
-		return col2;
-	}
-	/**
-	 * @param col2 the col2 to set
-	 */
-	public void setCol2(String col2) {
-		this.col2 = col2;
+	public void setCondition(String condition) {
+		this.condition = condition;
 	}
 	
 	
