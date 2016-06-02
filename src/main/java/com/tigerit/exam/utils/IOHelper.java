@@ -6,8 +6,17 @@ import java.util.StringTokenizer;
 
 import static com.tigerit.exam.IO.*;
 
+/**
+ * @author Sazedul Islam
+ * 
+ * This class is implemented with methods of taking input of various problem 
+ * specific objects conveniently.
+ */
 public class IOHelper {
-	// reads a line then tokenize it with ' ' and returns them as an array
+	/**
+	 * reads a line then tokenize it with ' ' and returns them as an array
+	 * @return returns an array of integers as inputed space separately
+	 */
     private static int[] readLineAsMultipleInteger() {
     	String str = readLine();
     	StringTokenizer tok = new StringTokenizer(str, " ");
@@ -20,7 +29,10 @@ public class IOHelper {
 		return retArr;
 	}
     
-    // Reader method of a test case
+    /**
+     * Reads single test case scenario
+     * @return An equivalent object of that test case scenario
+     */
     public static TestCase readTestCase() {
     	TestCase testCase = new TestCase();
     	// take number of table as input
@@ -36,6 +48,10 @@ public class IOHelper {
     	return testCase;
     }
     
+    /**
+     * Reads data of a single table 
+     * @return An equivalent object of that table
+     */
     public static Table readTable() {
     	Table table = new Table();
     	// take the table name as input
@@ -74,6 +90,10 @@ public class IOHelper {
     	return table;
     }
     
+    /**
+     * Reads a single query given in four lines as specified in the problem statement
+     * @return An equivalent object of that query statement
+     */
     public static Query readQuery() {
     	Query query = new Query();
     	

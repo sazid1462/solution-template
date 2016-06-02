@@ -1,12 +1,19 @@
 package com.tigerit.exam.utils;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
+/**
+ * @author Sazedul Islam
+ * 
+ * A class represents the query statement of the format specified 
+ * in the problem statement
+ */
 public class Query {
+	// Name of the columns to be printed. Multiple columns should be space separated
 	private String columns;
+	// Table short names and long names are stored respectively
 	private String tableShortNames[], tableLongNames[];
+	// Condition on which the operation should be done
 	private String condition;
+	
 	/**
 	 * @return the columns
 	 */
@@ -55,6 +62,5 @@ public class Query {
 	public void setCondition(String condition) {
 		this.condition = condition;
 	}
-	
-	
+		
 }

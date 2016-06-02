@@ -2,6 +2,11 @@ package com.tigerit.exam.utils;
 
 import java.util.HashMap;
 
+/**
+ * @author Sazedul Islam
+ * 
+ * A class represents TestCases from the problem statement
+ */
 public class TestCase {
 	private int numTable;
 	private HashMap<String, Table> tables;

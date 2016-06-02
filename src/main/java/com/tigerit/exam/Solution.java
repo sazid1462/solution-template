@@ -11,10 +11,9 @@ import com.tigerit.exam.utils.QueryProcessor;
 import com.tigerit.exam.utils.TestCase;
 
 /**
- * All of your application logic should be placed inside this class.
- * Remember we will load your application from our custom container.
- * You may add private method inside this class but, make sure your
- * application's execution points start from inside run method.
+ * @author Sazedul Islam
+ *  
+ * The application's execution points start from inside run method.
  */
 public class Solution implements Runnable {
     @Override
@@ -30,7 +29,10 @@ public class Solution implements Runnable {
         	readAndExecuteQueries(testCase);
         }
     }
-    
+    /**
+     * This method will process the testCase and print the solution
+     * @param testCase Object of the TestCase class
+     */
     private void readAndExecuteQueries(TestCase testCase) {
     	// take number of query as input
     	int numQuery = readLineAsInteger();

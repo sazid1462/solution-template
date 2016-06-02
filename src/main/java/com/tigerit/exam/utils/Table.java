@@ -3,6 +3,11 @@ package com.tigerit.exam.utils;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * @author Sazedul Islam
+ * 
+ * A class represents Tables
+ */
 public class Table {
 	private String name;
 	private ArrayList<String> columns;
@@ -50,6 +55,11 @@ public class Table {
 	public ArrayList<Integer> getValuesOf(String column) {
 		return values.get(column);
 	}
+	
+	/**
+	 * @deprecated
+	 * Prints the table in a convenient view
+	 */
 	public void print() {
 		System.out.println("############## Starts Table "+name+" #############");
 		
