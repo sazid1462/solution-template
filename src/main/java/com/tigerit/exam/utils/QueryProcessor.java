@@ -1,7 +1,10 @@
 package com.tigerit.exam.utils;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.StringTokenizer;
 
 /**
@@ -17,9 +20,13 @@ public class QueryProcessor {
 	// Maps the TableNames to their respective short versions
 	private HashMap<String, String> tableNames;
 	// Contains the result after the execution of the query
-	private ArrayList<ArrayList<Integer>> result;
+	private ArrayList<Node> result;
 	// Contains two given columns on which the joining operation should be done
 	private String col1, col2;
+	private boolean executed = false;
+	
+	// This ArrayList is for assisting int printResult() method
+	private int q[];	
 	
 	/**
 	 * Return value can be null if no query is executed
@@ -27,14 +34,6 @@ public class QueryProcessor {
 	 */
 	public ArrayList<String> getSelectedColumns() {
 		return selectedColumns;
-	}
-
-	/**
-	 * Return value can be null if no query is executed
-	 * @return the result
-	 */
-	public ArrayList<ArrayList<Integer>> getResult() {
-		return result;
 	}
 	
 	/**
@@ -46,7 +45,7 @@ public class QueryProcessor {
 	 * @param testCase An object of the TestCase
 	 * @param query An object of the Query
 	 */
-	public void executeQuery(TestCase testCase, Query query) {
+	public void processQueryStatement(TestCase testCase, Query query) {
 		// Mapping the TableNames to their respective short versions
 		tableNames = new HashMap<>();
 		for (int i=0; i<query.getTableLongNames().length; i++) {
@@ -112,25 +111,65 @@ public class QueryProcessor {
 				columnTableMap.put(column, testCase.getTable(tableNames.get(tableName)));
 			}
 		}
+	}
+
+	public void executeJoinAndBuildTrie() {
 		// Obtain the result of the join operation
-		result = new ArrayList<>(1000);
+		result = new ArrayList<>(10000);
+		result.add(new Node(0));
+		
 		ArrayList<Integer> columnTable1 = columnTableMap.get(col1).getValuesOf(col1);
 		ArrayList<Integer> columnTable2 = columnTableMap.get(col2).getValuesOf(col2);
 		for (int i=0; i<columnTable1.size(); i++) {
+			Node current = result.get(0);
 			for (int j=0; j<columnTable2.size(); j++) {
 				int val1 = columnTable1.get(i);
 				int val2 = columnTable2.get(j);
 				if (val1 == val2) {
-					ArrayList<Integer> resRow = new ArrayList<>(selectedColumns.size());
+//					ArrayList<Integer> resRow = new ArrayList<>(selectedColumns.size());
 					for (String column : selectedColumns) {
-						if (columnTableMap.get(column) == columnTableMap.get(col1)) 
-							resRow.add(columnTableMap.get(column).getValuesOf(column).get(i));
-						else 
-							resRow.add(columnTableMap.get(column).getValuesOf(column).get(j));
+						int value = -1;
+						if (columnTableMap.get(column) == columnTableMap.get(col1)) { 
+							value = columnTableMap.get(column).getValuesOf(column).get(i);
+						} else {
+							value = columnTableMap.get(column).getValuesOf(column).get(j);
+						}
+						Node next = current.findNode(value);
+						if (next == null) {
+							next = new Node(value);
+							current.insertNode(next);
+						}
+						current = next;
 					}
-					result.add(resRow);
+//					result.add(resRow);
 				}
 			}
 		}
+		executed = true;
+	}
+	
+	private void traverse(Node current, int qIndex) {
+		ArrayList<Integer> linkedValues = current.getLinkedValues();
+		Collections.sort(linkedValues);
+		if (linkedValues.isEmpty()) {
+			q[qIndex] = current.getValue();
+			for (int i=0; i<=qIndex; i++) {
+				if (i > 0) System.out.print(" ");
+				System.out.print(q[i]);
+			}
+			System.out.println();
+			return;
+		}
+		if (qIndex != -1) q[qIndex] = current.getValue();
+		for (int i=0; i<linkedValues.size(); i++) {
+			traverse(current.findNode(linkedValues.get(i)), qIndex+1);
+		}
+	}
+	
+	public void printResult() {
+		if (!executed) executeJoinAndBuildTrie();
+		
+		q = new int[selectedColumns.size()+5];
+		traverse(result.get(0), -1);
 	}
 }

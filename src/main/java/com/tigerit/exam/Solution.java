@@ -41,22 +41,23 @@ public class Solution implements Runnable {
     		Query query = readQuery();
     		QueryProcessor qProcessor = new QueryProcessor();
     		
-    		qProcessor.executeQuery(testCase, query);
-    		
+    		qProcessor.processQueryStatement(testCase, query);
+    		qProcessor.executeJoinAndBuildTrie();
     		ArrayList<String> resCol = qProcessor.getSelectedColumns();
     		for (int i=0; i<resCol.size(); i++) {
     			if (i > 0) System.out.print(" ");
     			System.out.print(resCol.get(i));
     		}
     		System.out.println();
-    		ArrayList<ArrayList<Integer>> res = qProcessor.getResult();
-    		for (int i=0; i<res.size(); i++) {
-    			for (int j=0; j<res.get(i).size(); j++) {
-    				if (j > 0) System.out.print(" ");
-    				System.out.print(res.get(i).get(j));
-    			}
-    			System.out.println();
-    		}
+    		qProcessor.printResult();
+//    		ArrayList<ArrayList<Integer>> res = qProcessor.getResult();
+//    		for (int i=0; i<res.size(); i++) {
+//    			for (int j=0; j<res.get(i).size(); j++) {
+//    				if (j > 0) System.out.print(" ");
+//    				System.out.print(res.get(i).get(j));
+//    			}
+//    			System.out.println();
+//    		}
     		System.out.println();
     	}
 	}
