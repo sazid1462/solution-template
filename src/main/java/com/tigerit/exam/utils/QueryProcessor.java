@@ -121,11 +121,11 @@ public class QueryProcessor {
 		ArrayList<Integer> columnTable1 = columnTableMap.get(col1).getValuesOf(col1);
 		ArrayList<Integer> columnTable2 = columnTableMap.get(col2).getValuesOf(col2);
 		for (int i=0; i<columnTable1.size(); i++) {
-			Node current = result.get(0);
 			for (int j=0; j<columnTable2.size(); j++) {
 				int val1 = columnTable1.get(i);
 				int val2 = columnTable2.get(j);
 				if (val1 == val2) {
+					Node current = result.get(0);
 //					ArrayList<Integer> resRow = new ArrayList<>(selectedColumns.size());
 					for (String column : selectedColumns) {
 						int value = -1;
@@ -140,6 +140,7 @@ public class QueryProcessor {
 							current.insertNode(next);
 						}
 						current = next;
+						next.increaseCount();
 					}
 //					result.add(resRow);
 				}
@@ -150,16 +151,18 @@ public class QueryProcessor {
 	
 	private void traverse(Node current, int qIndex) {
 		ArrayList<Integer> linkedValues = current.getLinkedValues();
-		Collections.sort(linkedValues);
 		if (linkedValues.isEmpty()) {
-			q[qIndex] = current.getValue();
-			for (int i=0; i<=qIndex; i++) {
-				if (i > 0) System.out.print(" ");
-				System.out.print(q[i]);
+			for (int cnt=0; cnt<current.getCount(); cnt++) {
+				q[qIndex] = current.getValue();
+				for (int i=0; i<=qIndex; i++) {
+					if (i > 0) System.out.print(" ");
+					System.out.print(q[i]);
+				}
+				System.out.println();
 			}
-			System.out.println();
 			return;
 		}
+		Collections.sort(linkedValues);
 		if (qIndex != -1) q[qIndex] = current.getValue();
 		for (int i=0; i<linkedValues.size(); i++) {
 			traverse(current.findNode(linkedValues.get(i)), qIndex+1);

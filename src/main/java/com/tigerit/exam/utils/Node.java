@@ -5,11 +5,13 @@ import java.util.HashMap;
 
 public class Node {
 	private int value;
+	private int count;
 	private ArrayList<Integer> linkedValues;
 	private HashMap<Integer, Node> links;
 	
 	public Node(int value) {
 		this.value = value;
+		count = 0;
 		linkedValues = new ArrayList<>();
 		links = new HashMap<>();
 	}
@@ -24,9 +26,23 @@ public class Node {
 	
 	public void insertNode(Node node) {
 		if (links.containsKey(node.value)) return;
-		
+
 		linkedValues.add(node.value);
 		links.put(node.value, node);
+	}
+
+	/**
+	 * @return the count
+	 */
+	public int getCount() {
+		return count;
+	}
+
+	/**
+	 * @param count the count to set
+	 */
+	public void increaseCount() {
+		this.count++;
 	}
 
 	/**
